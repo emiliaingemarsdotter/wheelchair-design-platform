@@ -96,7 +96,7 @@ The next step is the Python plugin for Atom, to get some help from in Atom
 specifically for Python. Go to the terminal and type:
 
 ```bash
-python3 -m pip install 'python-language-server[all]'
+python -m pip install 'python-language-server[all]'
 ```
 
 When it is installed, on the top menu of Atom, click on *'Packages' > 
