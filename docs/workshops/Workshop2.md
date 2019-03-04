@@ -33,6 +33,10 @@ On the wheel, we propose to implement the Feather 32u4, an Arduino-like, Bluetoo
 enabled board by AdaFruit. Have a look at the documentation we compiled to get
 an overview of its capabilities and set up your Arduino IDE: [Feather 32u4](../resources/feather.md)
 
+For this you will also have to install the following library (Bluefruit nRF51), which you can do in Sketch -> Include Library -> Manage Libraries :
+
+![](images/library.png)
+
 ## 3 Bluetooth Low Energy (BLE) GATT Service
 
 As described in its resource page, the Feather 32u4 has a Bluetooth Low Energy (BLE)
@@ -118,9 +122,10 @@ void initSensor(void) {
 ```
 
 At the beginning of setup(), we need to call this initSensor() so that our BNO055
-is ready.
-
-```cpp
+is ready. Note that, the very first line of setup, stops the connection from happening if the Serial console is not open (you can comment this out to stop this behaviour):
+``` c++
+  while(!Serial); 
+  
    // Setup the BNO055 sensor
   initSensor();
 ```
@@ -203,7 +208,7 @@ void loop(void) {
 ```
 
 The complete source code is available in
-<a href="https://github.com/datacentricdesign/wheelchair-design-platform/tree/master/examples/communication/bluetooth/bno055_gatt" target="_blank">examples /
+<a href="https://github.com/datacentricdesign/wheelchair-design-platform/tree/master/examples/communication/bluetooth/bno055_gatt_orientation" target="_blank">examples /
 communication / bluetooth / bno055_gatt</a>
 
 ### 3.3 Wire and set up on the Wheel
@@ -232,6 +237,8 @@ sudo apt-get install bluez libbluetooth-dev
 sudo pip3 install git+https://github.com/peplin/pygatt
 
 sudo pip3 install "pygatt[GATTTOOL]"
+
+sudo pip3 install bluepy
 ```
 
 We can use the command 'blescan' to scan the Bluetooth devices around. This way,
@@ -263,7 +270,7 @@ Then we need to define which GATT service we want to connect to. Thus we create 
 constant with the UUID of our orientation service.
 
 ```python
-GATT_CHARACTERISTIC_ORIENTATION = "02118833-4455-6677-8899-AABBCCDDEEFF"
+GATT_CHARACTERISTIC_ORIENTATION = "MY_GATT_ORIENTATION_SERVICE_UUID"
 ```
 
 We define a 'handler', a method which will be called every time new data is coming
