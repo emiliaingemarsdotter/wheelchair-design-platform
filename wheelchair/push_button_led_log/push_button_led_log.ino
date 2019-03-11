@@ -34,13 +34,13 @@ void loop() {
     if (buttonActiveSince > 0) {
       // End Long Press event
       if (longPressActive == true) {
-        Serial.println("button-action,2");
+        Serial.println("button-8cde,2");
         digitalWrite(LED_PIN, LOW);  // turn LED OFF
         longPressActive = false;
 
       // End Short Press event
       } else {
-        Serial.println("button-action,1");
+        Serial.println("button-8cde,1");
       }
       buttonActiveSince = 0;
     }
